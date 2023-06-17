@@ -67,7 +67,7 @@ jobs:
       - name: Run SonarCloud Scanner
         uses: sonarsource/sonarcloud-github-action@master
         with:
-          projectBaseDir: ../
+          projectBaseDir: ../../
           args: |
             -Dsonar.projectKey=itananeev
             -Dsonar.organization=itananeev
