@@ -58,6 +58,6 @@ jobs:
       - name: Deploy to GKE Cluster
         run: |
           gcloud components install gke-gcloud-auth-plugin
-          gcloud container clusters get-credentials olcauth-cluster --zone europe-west4
+          gcloud container clusters get-credentials togetherboxd-cluster --zone europe-west4
           sleep 5s
           kubectl set image deployment/api-gateway api-gateway=europe-west4-docker.pkg.dev/togetherboxd-389917/gateway-repo/api-gateway:${{ github.sha }}
