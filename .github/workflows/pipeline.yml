@@ -71,6 +71,7 @@ jobs:
           args: |
             -Dsonar.projectKey=itananeev
             -Dsonar.organization=itananeev
+            -Dsonar.branch.name=main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_KEY }}
