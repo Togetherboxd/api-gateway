@@ -21,9 +21,26 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
-      - name: Auth to Google Cloud Services
+  # Authentication to google cloud services
+      - name: Auth
+        id: 'auth'
+        uses: 'google-github-actions/auth@v1.0.0'
+        with:
+          credentials_json: '${{ secrets.API_KEY }}'
+          token_format: 'access_token'
+          create_credentials_file: true
+          
+  # Setting up tools for iteracting with google cloud services
+      - name: 'Set up Cloud SDK'
+        uses: 'google-github-actions/setup-gcloud@v0'
+        
+  #Check google cloud connection
+      - name: 'Use gcloud CLI'
+        run: 'gcloud info'
+
+      - name: Auth to google cloud services
         run: |
-          gcloud auth login --brief --cred-file=${{ secrets.API_KEY }}
+          gcloud auth login --brief --cred-file=${{ steps.auth.outputs.credentials_file_path }}
           gcloud auth configure-docker europe-west4-docker.pkg.dev
 
       - name: Build Docker Image
