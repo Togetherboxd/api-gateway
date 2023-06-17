@@ -52,13 +52,16 @@ jobs:
           docker build -t europe-west4-docker.pkg.dev/togetherboxd-389917/gateway-repo/api-gateway:${{ github.sha }} .
 
       # SonarQube Code Quality test
-      - name: 'Run SonarCloud Scanner'
-        uses: 'sonarsource/sonarcloud-github-action@master'
+      - name: Run SonarCloud Scanner
+        uses: sonarsource/sonarcloud-github-action@master
         with:
-          projectBaseDir: '../'
+          projectBaseDir: ../
+          token: ${{ secrets.SONAR_KEY }}
+          args: |
+            -Dsonar.projectKey=togetherboxd
+            -Dsonar.organization=togetherboxd
         env:
-          GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
-          SONAR_TOKEN: '${{ secrets.SONAR_KEY }}'
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 
       - name: Push Image to Registry
