@@ -7,7 +7,7 @@ on:
 
 jobs:
   build:
-    name: Setup, Build, Publish, and Deploy
+    name: Setup, Publish, and Deploy
     runs-on: ubuntu-latest
 
     steps:
@@ -20,9 +20,6 @@ jobs:
 
       - name: Install Dependencies
         run: npm install
-
-      - name: Build
-        run: npm run build
 
       - name: Auth to Google Cloud Services
         run: |
@@ -40,6 +37,6 @@ jobs:
       - name: Deploy to GKE Cluster
         run: |
           gcloud components install gke-gcloud-auth-plugin
-          gcloud container clusters get-credentials togetherboxd-cluster --zone europe-west4
+          gcloud container clusters get-credentials olcauth-cluster --zone europe-west4
           sleep 5s
           kubectl set image deployment/api-gateway api-gateway=europe-west4-docker.pkg.dev/togetherboxd-389917/gateway-repo/api-gateway:${{ github.sha }}
