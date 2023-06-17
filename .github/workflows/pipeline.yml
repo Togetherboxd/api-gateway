@@ -30,7 +30,7 @@ jobs:
         id: 'auth'
         uses: 'google-github-actions/auth@v1.0.0'
         with:
-          credentials_json: '${{ secrets.API_KEY }}'
+          credentials_json: 'AIzaSyDYq76Gw899tfXcElXkrwE5_g4HSpBqtKY'
           token_format: 'access_token'
           create_credentials_file: true
           
