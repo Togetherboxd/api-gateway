@@ -51,17 +51,20 @@ jobs:
         run:
           docker build -t europe-west4-docker.pkg.dev/togetherboxd-389917/gateway-repo/api-gateway:${{ github.sha }} .
 
-      # SonarQube Code Quality test
-      - name: Run SonarCloud Scanner
-        uses: sonarsource/sonarcloud-github-action@master
+  # Snyk vulnerability scan
+      - uses: actions/checkout@master
+      - uses: snyk/actions/setup@master
+      - uses: actions/setup-go@v1
         with:
-          projectBaseDir: ../
-          args: |
-            -Dsonar.projectKey=togetherboxd
-            -Dsonar.organization=togetherboxd
+          go-version: "1.13"
+      - name: Give execute permission to mvnw
+        run: chmod +x mvnw
+
+      - name: Scan for vulnerabilities with Snyk
+        run: snyk test --severity-threshold=medium || true
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SONAR_TOKEN: ${{ secrets.SONAR_KEY }}
+          SNYK_TOKEN: ${{ secrets.SNYK_AUTH_TOKEN }}
+        id: snyk-test
 
       - name: Push Image to Registry
         run:
