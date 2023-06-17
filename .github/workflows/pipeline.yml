@@ -56,13 +56,12 @@ jobs:
         uses: sonarsource/sonarcloud-github-action@master
         with:
           projectBaseDir: ../
-          token: ${{ secrets.SONAR_KEY }}
           args: |
             -Dsonar.projectKey=togetherboxd
             -Dsonar.organization=togetherboxd
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
+          SONAR_TOKEN: ${{ secrets.SONAR_KEY }}
 
       - name: Push Image to Registry
         run:
