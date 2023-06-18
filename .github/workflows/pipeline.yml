@@ -38,7 +38,7 @@ jobs:
       
       - name: Push Image to Registry
         run: |
-          docker push europe-west4-docker.pkg.dev/togetherboxd-389917/gateway-repo/gateway-api:v1
+          docker push europe-west4-docker.pkg.dev/togetherboxd-389917/gateway-repo/gateway-api:${{ github.sha }}
       
 
       - name: Deploy to GKE Cluster
