@@ -22,6 +22,7 @@ describe('API Gateway', () => {
     expect(response.statusCode).toBe(200);
     // Add your expectations for the response body and headers as needed
   });
+  
 
   test('should respond with "Hello from API" for root endpoint', async () => {
     const response = await request(app).get('/');
