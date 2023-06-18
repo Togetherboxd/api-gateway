@@ -26,7 +26,7 @@ jobs:
         id: 'auth'
         uses: 'google-github-actions/auth@v1.0.0'
         with:
-          credentials_json: '${{ secrets.API_TOKEN }}'
+          credentials_json: '${{ secrets.API_KEY }}'
           token_format: 'access_token'
           create_credentials_file: true
           
@@ -45,7 +45,7 @@ jobs:
 
       - name: Build Docker Image
         run:
-          docker build -t europe-west4-docker.pkg.dev/togetherboxd-389917/gateway-repository/api-gateway:${{ github.sha }} .
+          docker build -t europe-west4-docker.pkg.dev/togetherboxd-389917/gateway-repo/gateway-api:${{ github.sha }} .
 
   # Snyk vulnerability scan
       - uses: actions/checkout@master
@@ -61,7 +61,7 @@ jobs:
 
       - name: Push Image to Registry
         run:
-          docker push europe-west4-docker.pkg.dev/togetherboxd-389917/gateway-repository/api-gateway:${{ github.sha }}
+          docker push europe-west4-docker.pkg.dev/togetherboxd-389917/gateway-repo/gateway-api:${{ github.sha }}
       
 
       - name: Deploy to GKE Cluster
@@ -69,4 +69,4 @@ jobs:
           gcloud components install gke-gcloud-auth-plugin
           gcloud container clusters get-credentials togetherboxd-cluster --zone europe-west4
           sleep 5s
-          kubectl set image deployment/api-gateway api-gateway=europe-west4-docker.pkg.dev/togetherboxd-389917/gateway-repository/api-gateway:${{ github.sha }}
+          kubectl set image deployment/gateway-api gateway-api=europe-west4-docker.pkg.dev/togetherboxd-389917/gateway-repo/gateway-api:${{ github.sha }}
