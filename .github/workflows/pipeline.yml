@@ -51,7 +51,6 @@ jobs:
           docker build -t europe-west4-docker.pkg.dev/togetherboxd-389917/gateway-repo/gateway-api:${{ github.sha }} .
 
   # Snyk vulnerability scan
-      - uses: actions/checkout@master
       - uses: snyk/actions/setup@master
       - uses: actions/setup-go@v1
         with:
