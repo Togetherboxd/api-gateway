@@ -59,9 +59,13 @@ jobs:
           SNYK_TOKEN: ${{ secrets.SNYK_AUTH_TOKEN }}
         id: snyk-test
 
+      - name: Verify Docker Image
+        run:
+          docker images
+
       - name: Push Image to Registry
         run:
-          docker push europe-west4-docker.pkg.dev/togetherboxd-389917/gateway-repo/gateway-api:${{ github.sha }}
+          docker push europe-west4-docker.pkg.dev/togetherboxd-389917/gateway-repo/gateway-api:v1
       
 
       - name: Deploy to GKE Cluster
