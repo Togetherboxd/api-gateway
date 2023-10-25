@@ -12,12 +12,14 @@ app.use('/friends', proxy('http://localhost:3002'));
 
 app.use('/notifications', proxy('http://localhost:3004'));
 
+app.use('/posts', proxy('http://localhost:3009'));
+
 app.use('/', (req, res, next) => {
     return res.status(200).json({ "msg": "Hello from API" })
 });
 
-app.listen(3003, () => {
+const server = app.listen(3003, () => {
     console.log('API gateway is listening to port 3003')
 });
 
-module.exports = app;
+module.exports = { app, server };

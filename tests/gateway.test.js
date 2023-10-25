@@ -1,7 +1,11 @@
 const request = require('supertest');
-const app = require('../index');
+const { app, server } = require('../index');
 
 describe('API Gateway', () => {
+  afterEach((done) => {
+    server.close(done);
+  });
+
   test('should proxy the authentication requests', async () => {
     const response = await request(app).post('/authentication/register');
 
