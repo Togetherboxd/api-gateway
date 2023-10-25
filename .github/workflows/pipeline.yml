@@ -72,6 +72,6 @@ jobs:
       - name: Deploy to GKE Cluster
         run: |
           gcloud components install gke-gcloud-auth-plugin
-          gcloud container clusters get-credentials togetherboxd-cluster --zone europe-west4
+          gcloud container clusters get-credentials tboxd-cluster --zone europe-west4
           sleep 5s
           kubectl set image deployment/gateway-app gateway-app=europe-west4-docker.pkg.dev/tboxd-399816/gateway-repo/gateway-app:${{ github.sha }}
