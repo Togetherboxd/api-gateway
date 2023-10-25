@@ -1,7 +1,7 @@
 const request = require('supertest');
 const { app, server } = require('../index');
 
-describe('API Gateway', () => {
+describe('Gateway', () => {
   afterEach((done) => {
     server.close(done);
   });
