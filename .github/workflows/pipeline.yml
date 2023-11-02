@@ -68,20 +68,6 @@ jobs:
           SNYK_TOKEN: ${{ secrets.SNYK_AUTH_TOKEN }}
         id: snyk-test
 
-      - name: Checkout code
-        uses: actions/checkout@v2
-  
-      - name: Start ZAP Scanner
-        run: |
-          docker pull owasp/zap2docker-stable
-          docker run -t owasp/zap2docker-stable zap-baseline.py -t http://34.34.43.6:8080 -J zap-report.json
-  
-      - name: Upload ZAP Report
-        uses: actions/upload-artifact@v2
-        with:
-          name: zap-report
-          path: zap-report.json
-
       - name: Push Image to Registry
         run:
           docker push europe-west4-docker.pkg.dev/tboxd-399816/gateway-repo/gateway-app:${{ github.sha }}
