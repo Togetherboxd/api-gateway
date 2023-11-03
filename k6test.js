@@ -8,7 +8,7 @@ export let options = {
 
 export default function () {
   // Send a GET request to your API gateway
-  let response = http.get('http://localhost:3003');
+  let response = http.get('http://34.34.43.6:8080');
 
   // Check the response to ensure it's a 200 OK status
   check(response, { 'status is 200': (r) => r.status === 200 });
