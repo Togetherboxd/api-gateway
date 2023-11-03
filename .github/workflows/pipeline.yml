@@ -76,17 +76,12 @@ jobs:
           cloud: true
           token: ${{secrets.K6_CLOUD_API_TOKEN}}
 
-      
-      - name: Install OWASP ZAP
-        run: |
-          wget https://github.com/zaproxy/zaproxy/releases/download/v2.11.0/ZAP_2_11_0_unix.sh
-          chmod +x ZAP_2_11_0_unix.sh
-          ./ZAP_2_11_0_unix.sh -n
-        
-      - name: Run ZAP Security Test
-        run: |
-          zap.sh -quickurl http://34.34.43.6:8080 -config zap-config.json
-
+      - name: ZAP Scan
+        uses: zaproxy/action-baseline@v0.6.1
+        with:
+          docker_name: 'owasp/zap2docker-stable'
+          target: 'http://34.34.43.6:8080'
+          cmd_options: '-a'
 
       - name: Push Image to Registry
         run:
