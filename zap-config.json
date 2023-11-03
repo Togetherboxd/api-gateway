@@ -1,0 +1,24 @@
+{
+    "proxy": {
+      "address": "34.34.43.6",
+      "port": 8080
+    },
+    "spider": {
+      "maxDepth": 5,
+      "threadCount": 5,
+      "ignoreImages": true,
+      "parseComments": false
+    },
+    "ajaxSpider": {
+      "inScope": false
+    },
+    "ascan": {
+      "url": "",
+      "recurse": "true",
+      "scanPolicyName": "Default Policy",
+      "enable": "true",
+      "attackStrength": "Low",
+      "maxResultsToList": "1000"
+    }
+  }
+  
