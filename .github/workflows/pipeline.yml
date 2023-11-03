@@ -68,6 +68,15 @@ jobs:
           SNYK_TOKEN: ${{ secrets.SNYK_AUTH_TOKEN }}
         id: snyk-test
 
+
+      - name: k6 Load Test
+        uses: k6io/action@v0.1
+        with:
+          filename: k6test.js
+          cloud: true
+          token: ${{secrets.K6_CLOUD_API_TOKEN}}
+
+
       - name: Push Image to Registry
         run:
           docker push europe-west4-docker.pkg.dev/tboxd-399816/gateway-repo/gateway-app:${{ github.sha }}
